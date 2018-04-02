@@ -1,7 +1,7 @@
 # Arquitetura de Computadores
 Implementação de um simulador de uma Unidade de Controle Microprogramada para a disciplina Arquitetura de Computadores do PPGI - UFPB.
 
-##Autor
+## Autor
 Marcelo Hércules Cunha Soares
 
 ## Execução do programa
