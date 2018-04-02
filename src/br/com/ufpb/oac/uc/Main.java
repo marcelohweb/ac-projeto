@@ -9,7 +9,7 @@ import java.util.Scanner;
  * A implementação foi baseada no capítulo 15 do livro Organização e Arquitetura de Computadores de William Stallings - 8ª edição.
  * 
  * @see https://sites.google.com/site/alissonbrito/Home/cursos/2010-2-2011-1-atual/arquitetura-de-computadores
- * @author Marcelo Soares
+ * @author Marcelo Soares <marceloh.web@gmail.com>
  *
  */
 public class Main {
