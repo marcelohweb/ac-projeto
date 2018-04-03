@@ -65,7 +65,7 @@ public class Main {
 
 		try {
 			
-			System.out.println("Iniciando o simulador de UC Microprogramda");
+			System.out.println("Iniciando o simulador de Unidade de Controle Microprogramada");
 			
 			float cpi = 0;
 			
@@ -96,7 +96,7 @@ public class Main {
 					// busca
 					case 00:
 						
-						System.out.println("ICC: 00 - iniciando microoperações para busca");
+						System.out.println("ICC: 00 - Iniciando microoperações para busca");
 						
 						System.out.printf("Valor do PC (Program Counter): %d. Movendo o valor do endereço da próxima instrução em PC para o registrador MAR\n",pc);
 						mar = String.valueOf(pc);
@@ -122,7 +122,7 @@ public class Main {
 						
 						//Diferentes microoperações devido aos diferentes opcodes
 						
-						System.out.println("ICC: 10 - iniciando microoperações para execução da instrução " + ir);
+						System.out.println("ICC: 10 - Iniciando microoperações para execução da instrução " + ir);
 						
 						//Quebra a string da linha do assembly.asm para pegar posteriormente instrução e valores
 						String[] aux = ir.split(" ");
@@ -138,7 +138,7 @@ public class Main {
 							//Stallings (2010, p.465)
 							mar = ir;
 							
-							System.out.println("Lendo o valor da memória e adicionando em mbr");
+							System.out.println("Lendo o valor da memória e adicionando em MBR");
 							//Lê o valor da memória e adiciona em mbr
 							mbr  = FileAccess.readLine(memoryFile, Utils.getValue(aux[2]));
 							
@@ -234,7 +234,7 @@ public class Main {
 						//Quebra a string da linha do assembly.asm para pegar posteriormente instrução e valores
 						String[] auxiliar = ir.split(" ");
 						
-						System.out.println("ICC: 11 - iniciando microoperações para armazenamento em memória para a instrução: " + ir);
+						System.out.println("ICC: 11 - Iniciando microoperações para armazenamento em memória para a instrução: " + ir);
 						
 						System.out.println("Buscando o valor do registrador: " + Utils.getRegisterName(auxiliar[1]));
 						
