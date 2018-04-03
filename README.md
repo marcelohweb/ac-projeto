@@ -8,21 +8,13 @@ Marcelo Hércules Cunha Soares ( <marceloh.web@gmail.com>  )
 
 É necessário ter o Java 8 instalado. Obs. Só funcionará na versão 8 do Java.
 
-Importe o projeto no Eclipse como um Java Project, dê um clique inverso no projeto -> Run as -> Java Application.
+Baixe o uc-simulator.jar juntamente com os arquivos $r1.txt, $r2.txt, $r3.txt, memory.txt, assembly.asm e os coloque na mesma hierarquia de um diretório.
+
+Caso o java já esteja no path do seu SO, na linha e comando digite java -jar uc-simulator.jar
+
+Você pode alternativamente importar o projeto no Eclipse como um Java Project, dar um clique inverso no projeto -> Run as -> Java Application. 
 
 Certifique-se de que o JRE e compilador estão na versão 1.8
-
-Também é possível exportar como um jar executável.
-
-No Eclipse, siga os seguintes passos:
-
-* Clique inverso no projeto -> Export
-* Runnable jar file
-* Finish
-
-Copie os arquivos .txt e o arquivo .asm para o mesmo diretório de onde o jar foi gerado.
-
-Caso o java já esteja no path do seu SO, na linha e comando digite java -jar nome-do-jar.jar
 
 ### Estrutura de arquivos
 
