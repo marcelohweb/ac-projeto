@@ -12,7 +12,7 @@ Baixe o uc-simulator.jar juntamente com os arquivos $r1.txt, $r2.txt, $r3.txt, m
 
 Caso o java já esteja no path do seu SO, na linha e comando digite java -jar uc-simulator.jar
 
-Você pode alternativamente importar o projeto no Eclipse como um Java Project, dar um clique inverso no projeto -> Run as -> Java Application. 
+Outra alternativa é importar o projeto no Eclipse como um Java Project, dar um clique inverso no projeto -> Run as -> Java Application. 
 
 Certifique-se de que o JRE e compilador estão na versão 1.8
 
