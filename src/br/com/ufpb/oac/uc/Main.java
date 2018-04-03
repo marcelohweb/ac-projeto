@@ -41,7 +41,7 @@ public class Main {
 	/**
 	 * Registrador código de ciclo de instrução. Indica a etapa a ser realizada: busca de instrução (00), execução (10) e armazenamento em memória (11)
 	 */
-	static String icc = "00";
+	static int icc = 00;
 	
 	/**
 	 * Nome do arquivo com as instruções assembly
@@ -94,9 +94,9 @@ public class Main {
 					//UC verifica o código de ciclo de instrução
 					switch (icc) {
 					// busca
-					case "00":
-
-						System.out.println("ICC: 00 - busca");
+					case 00:
+						
+						System.out.println("ICC: 00 - iniciando microoperações para busca");
 						
 						System.out.printf("Valor do PC (Program Counter): %d. Movendo o valor do endereço da próxima instrução em PC para o registrador MAR\n",pc);
 						mar = String.valueOf(pc);
@@ -112,17 +112,17 @@ public class Main {
 						mbr = null;
 						
 						//altera o icc para o de execução
-						icc = "10";
+						icc = 10;
 						
 						System.out.println();
 						
 						break;
 					// execução
-					case "10":
+					case 10:
 						
 						//Diferentes microoperações devido aos diferentes opcodes
 						
-						System.out.println("ICC: 10 - execução da instrução " + ir);
+						System.out.println("ICC: 10 - iniciando microoperações para execução da instrução " + ir);
 						
 						//Quebra a string da linha do assembly.asm para pegar posteriormente instrução e valores
 						String[] aux = ir.split(" ");
@@ -135,26 +135,30 @@ public class Main {
 						switch (instrucao) {
 						case "lw"://Carregar dado da memória no registrador (lw register_destination, RAM_source)
 							
-							//Lê o valor da memória
-							String variavel  = FileAccess.readLine(memoryFile, Utils.getValue(aux[2]));
+							//Stallings (2010, p.465)
+							mar = ir;
+							
+							System.out.println("Lendo o valor da memória e adicionando em mbr");
+							//Lê o valor da memória e adiciona em mbr
+							mbr  = FileAccess.readLine(memoryFile, Utils.getValue(aux[2]));
 							
 							//Pega o nome do registrador
 							String registerName = Utils.getRegisterName(aux[1]);
 							//Pega o arquivo de texto que representa o registrador
 							String registerFileName = Utils.getRegisterFileName(registerName);
 							
-							System.out.println("Inserindo o valor " + variavel + " no registrador " + registerName);
+							System.out.println("Inserindo o valor " + mbr + " no registrador " + registerName);
 							//Grava o valor no arquivo que representa o registrador
-							FileAccess.write(registerFileName, variavel);
+							FileAccess.write(registerFileName, mbr);
 							
 							//Altera o icc para busca
-							icc = "00";
+							icc = 00;
 							
 							break;
 						case "sw"://Salva dado de um registrador na memória (sw register_source, RAM_destination)
 							
 							//Altera o icc para busca para armazenamento em memória
-							icc = "11";
+							icc = 11;
 							
 							break;
 						case "add"://Operação de soma
@@ -184,15 +188,15 @@ public class Main {
 							FileAccess.write(registerResultSomaFileName, String.valueOf(resultSoma));
 							
 							//Altera o icc para busca
-							icc = "00";
+							icc = 00;
 							
 							break;
 						case "sub"://Operação de subtração
 							
 							//Stallings (2010, p.465)
 							mar = ir;
-							
-							//Obtendo os operandos dos registradores
+						
+							//Obtendo os operandos dos registradores. Não acessaremos a memmória pois os dados já foram carregados nos registradores em instrução anterior
 							String operandoSub1File = Utils.getRegisterFileName(Utils.getRegisterName(aux[2]));
 							String operandoSub2File = Utils.getRegisterFileName(Utils.getRegisterName(aux[3]));
 							
@@ -214,7 +218,7 @@ public class Main {
 							FileAccess.write(registerResultSubFileName, String.valueOf(resultSub));
 							
 							//Altera o icc para busca
-							icc = "00";
+							icc = 00;
 							
 							break;
 
@@ -225,12 +229,12 @@ public class Main {
 						System.out.println();
 						
 						break;
-					// armazenamento em memória
-					case "11":
+					//armazenamento em memória
+					case 11:
 						//Quebra a string da linha do assembly.asm para pegar posteriormente instrução e valores
 						String[] auxiliar = ir.split(" ");
 						
-						System.out.println("ICC: 11 - armazenamento em memória para a instrução: " + ir);
+						System.out.println("ICC: 11 - iniciando microoperações para armazenamento em memória para a instrução: " + ir);
 						
 						System.out.println("Buscando o valor do registrador: " + Utils.getRegisterName(auxiliar[1]));
 						
@@ -252,7 +256,7 @@ public class Main {
 						//Fim da escrita na memória
 						
 						//Altera o icc para busca
-						icc = "00";
+						icc = 00;
 						
 						System.out.println();
 						
