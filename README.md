@@ -8,7 +8,7 @@ Marcelo Hércules Cunha Soares ( <marceloh.web@gmail.com>  )
 
 É necessário ter o Java 8 instalado. Obs. Só funcionará na versão 8 do Java.
 
-Baixe o uc-simulator.jar juntamente com os arquivos $r1.txt, $r2.txt, $r3.txt, memory.txt, assembly.asm e os coloque na mesma hierarquia de um diretório.
+Baixe o arquivo uc-simulator.jar juntamente com os arquivos $r1.txt, $r2.txt, $r3.txt, memory.txt, assembly.asm e os coloque na mesma hierarquia de um diretório.
 
 Caso o java já esteja no path do seu SO, na linha e comando digite java -jar uc-simulator.jar
 
