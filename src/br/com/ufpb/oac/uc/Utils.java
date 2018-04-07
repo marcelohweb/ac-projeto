@@ -8,7 +8,7 @@ package br.com.ufpb.oac.uc;
 public class Utils {
 
 	/**
-	 * Método auxiliarpara retornar um valor entre parênteses que representa um endereço de memória
+	 * Método auxiliar para retornar um valor entre parênteses que representa um endereço de memória
 	 * @return
 	 */
 	public static int getValue(String value) {
