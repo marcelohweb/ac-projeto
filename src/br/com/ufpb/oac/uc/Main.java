@@ -81,7 +81,7 @@ public class Main {
 				return;
 			}
 			
-			//Pega a quantidade de isntruções no arquivo assembly.asm para usar no loop principal
+			//Pega a quantidade de instruções no arquivo assembly.asm para usar no loop principal
 			int qtdInstrucoes = FileAccess.getFileSize(programAssemblyFile);
 
 			System.out.printf("Quantidade de instruções encontradas: %d\n\n", qtdInstrucoes);
@@ -98,6 +98,7 @@ public class Main {
 						
 						System.out.println("ICC: 00 - Iniciando microoperações para busca");
 						
+						//Stallings (2010, p.463)
 						System.out.printf("Valor do PC (Program Counter): %d. Movendo o valor do endereço da próxima instrução em PC para o registrador MAR\n",pc);
 						mar = String.valueOf(pc);
 						
@@ -166,10 +167,11 @@ public class Main {
 							//Stallings (2010, p.465)
 							mar = ir;
 							
-							//Obtendo os operandos dos registradores
+							//Obtendo os nomes dos arquivos que representam os registradores onde os valores foram armazenados
 							String operando1File = Utils.getRegisterFileName(Utils.getRegisterName(aux[2]));
 							String operando2File = Utils.getRegisterFileName(Utils.getRegisterName(aux[3]));
 							
+							//Obtendo os operandos dos registradores. Não acessaremos a memória pois os dados já foram carregados nos registradores em instrução anterior
 							int operandoSoma1Value  = Integer.parseInt(FileAccess.readLine(operando1File, 0));
 							int operandoSoma2Value  = Integer.parseInt(FileAccess.readLine(operando2File, 0));
 							
@@ -196,10 +198,11 @@ public class Main {
 							//Stallings (2010, p.465)
 							mar = ir;
 						
-							//Obtendo os operandos dos registradores. Não acessaremos a memmória pois os dados já foram carregados nos registradores em instrução anterior
+							//Obtendo os nomes dos arquivos que representam os registradores onde os valores foram armazenados
 							String operandoSub1File = Utils.getRegisterFileName(Utils.getRegisterName(aux[2]));
 							String operandoSub2File = Utils.getRegisterFileName(Utils.getRegisterName(aux[3]));
 							
+							//Obtendo os operandos dos registradores. Não acessaremos a memória pois os dados já foram carregados nos registradores em instrução anterior
 							int operandoSub1Value  = Integer.parseInt(FileAccess.readLine(operandoSub1File, 0));
 							int operandoSub2Value  = Integer.parseInt(FileAccess.readLine(operandoSub2File, 0));
 							
@@ -243,6 +246,7 @@ public class Main {
 						int registradorValue  = Integer.parseInt(FileAccess.readLine(registrador, 0));
 						
 						List<String> memoryContent = FileAccess.readAllLines(memoryFile);
+						
 						//Escreve na memória no endereço especificado. Neste simulador, o endereço representa o índice da linha do arquivo. Ex: sw $r1, (0) #escreverá o valor de $r1 na primeira linha de memory.txt
 						int enderecoMemoria = Utils.getValue(auxiliar[2]);
 						
@@ -250,6 +254,7 @@ public class Main {
 						
 						if(enderecoMemoria < memoryContent.size())
 							memoryContent.remove( Utils.getValue(auxiliar[2]));
+						
 						memoryContent.add( Utils.getValue(auxiliar[2]), String.valueOf(registradorValue));
 						
 						FileAccess.writeListEachElementByRow(memoryFile, memoryContent);
