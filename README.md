@@ -20,10 +20,10 @@ Certifique-se de que o JRE e compilador estão na versão 1.8
 
 * assembly.asm - Arquivo com instruções em assembly que serão executadas pelo simulador. 
 * memory.txt - Representa a memória principal. Contém os valores iniciais das variáveis e após a execução conterá os valores finais
-* $r1.txt - Representa o registrador $r1 que é referenciado pelo arquivo assemnly.asm
-* $r2.txt - Representa o registrador $r2 que é referenciado pelo arquivo assemnly.asm
-* $r3.txt - Representa o registrador $r3 que é referenciado pelo arquivo assemnly.asm
+* $r1.txt - Representa o registrador $r1 que é referenciado pelo arquivo assembly.asm
+* $r2.txt - Representa o registrador $r2 que é referenciado pelo arquivo assembly.asm
+* $r3.txt - Representa o registrador $r3 que é referenciado pelo arquivo assembly.asm
 
-Obs. Apenas as instruções lw, sw, add e sub são suportadas na primeira versão. No arquivo assembly.asm, os números entre parênteses (ex: (0)) simulam um endereço de memória, que neste simulador corresponde ao índice da linha no arquivo memory.txt. Por exemplo: a instrução sw $r1, (0) deve escrever o valor do registrador $r1 na primeira linha do arquivo memory.txt
+Obs. Apenas as instruções lw, sw, add e sub são suportadas na primeira versão do simulador. No arquivo assembly.asm, os números entre parênteses (ex: (0)) simulam um endereço de memória, que neste simulador corresponde ao índice da linha no arquivo memory.txt. Por exemplo: a instrução sw $r1, (0) deve escrever o valor do registrador $r1 na primeira linha do arquivo memory.txt
 
 Ao executar o programa, informe o CPI médio do seu processador para o cálculo de ciclos de clock necessários para a execução do programa (assembly).
