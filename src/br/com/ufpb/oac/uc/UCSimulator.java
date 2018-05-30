@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Marcelo Soares <marceloh.web@gmail.com>
  *
  */
-public class ICSimulator {
+public class UCSimulator {
 
 	/**
 	 * Registrador de endereço de memória (MAR): conectado às linhas de endereço do

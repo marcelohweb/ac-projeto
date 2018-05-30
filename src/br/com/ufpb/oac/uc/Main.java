@@ -35,7 +35,7 @@ public class Main {
 	
 		    switch (choice) {
 		        case 1:
-		        	ICSimulator.start();
+		        	UCSimulator.start();
 		            break;
 		        case 2:
 		            CacheSimulator.start();
