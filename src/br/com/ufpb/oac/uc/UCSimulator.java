@@ -253,9 +253,9 @@ public class UCSimulator {
 						System.out.println("Armazenando o valor " + String.valueOf(registradorValue) + " no endereço de memória(linha do arquivo): " + String.valueOf(enderecoMemoria));
 						
 						if(enderecoMemoria < memoryContent.size())
-							memoryContent.remove( Utils.getValue(auxiliar[2]));
+							memoryContent.remove(Utils.getValue(auxiliar[2]));
 						
-						memoryContent.add( Utils.getValue(auxiliar[2]), String.valueOf(registradorValue));
+						memoryContent.add(Utils.getValue(auxiliar[2]), String.valueOf(registradorValue));
 						
 						FileAccess.writeListEachElementByRow(memoryFile, memoryContent);
 						//Fim da escrita na memória
