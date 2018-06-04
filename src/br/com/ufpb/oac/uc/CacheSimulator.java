@@ -3,6 +3,7 @@ package br.com.ufpb.oac.uc;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Simulador de acesso à Memória Cache
@@ -12,12 +13,13 @@ import java.util.List;
 public class CacheSimulator {
 
 	/**
-	 * Nome do arquivo que representa a memória cache
+	 * Nome do arquivo que representa a memória cache que armazena 4 bytes por linha
+	 * Formato do arquivo: ValidityBit(1 bit)|Tag(8 bits)|Data(32 bits)
 	 */
 	static String cacheFile = "cache.txt";
 	
 	/**
-	 * HashMap para representar a memória principal. A
+	 * HashMap para representar a memória principal.
 	 */
 	static HashMap<String, String> mainMemory = new HashMap<>();
 
@@ -29,22 +31,57 @@ public class CacheSimulator {
 		try {
 			
 			//Block 1
-			mainMemory.put("111111110000000000001100", "00001010");//word 1
-			mainMemory.put("111111110000000000001101", "00001011");//word 2
-			mainMemory.put("111111110000000000001110", "00001100");//word 3
-			mainMemory.put("111111110000000000001111", "00001101");//word 4
-
+			mainMemory.put("111111110000000000000000", "00001010");//word 1
+			mainMemory.put("111111110000000000000001", "00001011");//word 2
+			mainMemory.put("111111110000000000000010", "00001100");//word 3
+			mainMemory.put("111111110000000000000011", "00001101");//word 4
+			
 			//Block 2
-			mainMemory.put("101111110000000000001000", "00001010");//word 1
-			mainMemory.put("101111110000000000001001", "00001011");//word 2
-			mainMemory.put("101111110000000000001010", "00001100");//word 3
-			mainMemory.put("101111110000000000001011", "00001101");//word 4
+			mainMemory.put("111111100000000000000100", "00001010");//word 1
+			mainMemory.put("111111100000000000000101", "00001011");//word 2
+			mainMemory.put("111111100000000000000110", "00001100");//word 3
+			mainMemory.put("111111100000000000000111", "00001101");//word 4
+			
+			//Block 3
+			mainMemory.put("111111010000000000001000", "00001010");//word 1
+			mainMemory.put("111111010000000000001001", "00001011");//word 2
+			mainMemory.put("111111010000000000001010", "00001100");//word 3
+			mainMemory.put("111111010000000000001011", "00001101");//word 4
+			
+			//Block 4
+			mainMemory.put("101111110000000000001100", "00001010");//word 1
+			mainMemory.put("101111110000000000001101", "00001011");//word 2
+			mainMemory.put("101111110000000000001110", "00001100");//word 3
+			mainMemory.put("101111110000000000001111", "00001101");//word 4
+			
+			//Block 5
+			mainMemory.put("100111110000000000000000", "00001010");//word 1
+			mainMemory.put("100111110000000000000001", "00001011");//word 2
+			mainMemory.put("100111110000000000000010", "00001100");//word 3
+			mainMemory.put("100111110000000000000011", "00001101");//word 4
+			
+			//Block 6
+			mainMemory.put("101011110000000000000100", "00001010");//word 1
+			mainMemory.put("101011110000000000000101", "00001011");//word 2
+			mainMemory.put("101011110000000000000110", "00001100");//word 3
+			mainMemory.put("101011110000000000000111", "00001101");//word 4
 
 			System.out.println("Acesso à memória cache");
-
-			// Read Address - Endereço de leitura da memória
-			String ra = "101111110000000000001000";
 			
+			String ra;
+			
+			try {
+				
+				//Solicitando que o usuário informe o CPI médio do processador para o cálculo de ciclos de clocks da aplicação
+				Scanner input = new Scanner(System.in);
+				System.out.print("Informe o endereço de memória: ");
+				ra = input.next();
+			
+			}catch(Exception e){
+				System.out.println("Valor incorreto");
+				return;
+			}
+
 			System.out.println("Recebe um endereço RA de 32 bits da CPU: " + ra);
 
 			String tag = ra.substring(0, 8);
@@ -55,6 +92,7 @@ public class CacheSimulator {
 			System.out.println("Line (22 bits): " + line);
 			System.out.println("WordNumber (2 bits): " + word);
 
+			// Verifica se o bloco que contém a RA está na cache
 			System.out.println("Iniciando verificação na memória cache");
 			
 			System.out.println("Lendo a linha " + Converter.binaryToDec(line) + " da memória cache");
@@ -63,20 +101,39 @@ public class CacheSimulator {
 			
 			System.out.println("Conteúdo da linha " +  Converter.binaryToDec(line) + " da memória cache: " + lineCache);
 			
-			String cacheTag = lineCache.substring(1, 9);
-
-			System.out.println(cacheTag);
+			String validityBit = lineCache.substring(0, 1);
 			
-			String raValue;
-
-			// Verifica se o bloco que contém a RA está na cache
-			boolean isRAInCache = true;
-
-			if (tag.equals(cacheTag)) {
+			System.out.println("Bit de validade da tag: " + validityBit);
+			
+			boolean isCacheHit;
+			
+			if(validityBit.equals("1")) {
+			
+				String cacheTag = lineCache.substring(1, 9);
+	
+				System.out.println("Comparando valor da tag extraída do endereço com tag da linha da cache:");
 				
-				System.out.println("CacheHit. Ler um dos 4 bytes da cache a partir da palavra");
+				System.out.println("(" + tag + "==" + cacheTag + ")");
 				
-				System.out.println("Byte carregado: " + Converter.binaryToDec(word));
+				if (tag.equals(cacheTag)) {
+					
+					isCacheHit = true;
+					
+				}else {
+					isCacheHit = false;
+				}
+			
+			}else {
+				isCacheHit = false;
+			}
+				
+			if(isCacheHit) {
+				
+				System.out.println("CacheHit");
+				
+				System.out.println("Ler um dos 4 bytes da cache a partir da palavra");
+				
+				System.out.println("Número do byte a carregar: " + Converter.binaryToDec(word));
 				
 				String byteValue = null;
 				
@@ -106,14 +163,7 @@ public class CacheSimulator {
 				
 				System.out.println("Valor do byte em decimal: " + Converter.binaryToDec(byteValue));
 				
-			} else {
-				
-				/**
-				 * ▶ Senão, cache miss.
-					⋆ Determina-se o bloco ao qual pertence o endereço.
-					⋆ Todo o bloco é trazido para a cache, na linha adequada.
-				 * 
-				 */
+			}else{
 				
 				System.out.println("CacheMiss");
 				
@@ -124,18 +174,24 @@ public class CacheSimulator {
 				System.out.println("Acessa à memória principal no endereço " + tagLine);
 				
 				String data = mainMemory.get(tag + line + "00") + mainMemory.get(tag + line + "01") + mainMemory.get(tag + line + "10") + mainMemory.get(tag + line + "11");
+				
+				if(data == null) {
+					System.out.println("Não foi possível encontrar o endereço na memória principal");
+				}else {
 
-				System.out.println("Palavras do bloco da memória principal: " + data);
+					System.out.println("Palavras do bloco da memória principal: " + data);
+					
+					System.out.println("Armazena bloco da memória da cache");
+					
+					String newValidityBit = "1";
+					
+					List<String> cacheContent = FileAccess.readAllLines(cacheFile);
+					cacheContent.remove(Converter.binaryToDec(line));
+					cacheContent.add(Converter.binaryToDec(line), newValidityBit + tag + data);
+					
+					FileAccess.writeListEachElementByRow(cacheFile, cacheContent);
 				
-				System.out.println("Armazena bloco da memória da cache");
-				
-				String validityBit = "1";
-				
-				List<String> cacheContent = FileAccess.readAllLines(cacheFile);
-				cacheContent.remove(Converter.binaryToDec(line));
-				cacheContent.add(Converter.binaryToDec(line), validityBit + tag + data);
-				
-				FileAccess.writeListEachElementByRow(cacheFile, cacheContent);
+				}
 				
 			}
 
