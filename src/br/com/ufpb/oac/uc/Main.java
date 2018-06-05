@@ -29,7 +29,7 @@ public class Main {
 			System.out.println("Selecione o simulador:");
 			System.out.println("-------------------------\n");
 			System.out.println("1 - Unidade de Controle Microprogramada");
-			System.out.println("2 - Acesso à memória cache");
+			System.out.println("2 - Acesso à Memória Cache");
 			
 		    choice = scanner.nextInt();
 	
