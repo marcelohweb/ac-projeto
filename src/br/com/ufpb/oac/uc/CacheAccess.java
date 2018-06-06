@@ -3,7 +3,6 @@ package br.com.ufpb.oac.uc;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Simulador de acesso à Memória Cache
@@ -11,7 +10,7 @@ import java.util.Scanner;
  * @author Marcelo
  *
  */
-public class CacheSimulator {
+public class CacheAccess {
 
 	/**
 	 * Nome do arquivo que representa a memória cache que armazena 4 bytes por linha
@@ -27,62 +26,49 @@ public class CacheSimulator {
 	/**
 	 * Inicia o simulador
 	 */
-	public static void start() {
+	public static int start(String ra) {
 
 		try {
-
+			
 			// Block 1
-			mainMemory.put("111111110000000000000000", "00001010");// word 1
-			mainMemory.put("111111110000000000000001", "00001011");// word 2
-			mainMemory.put("111111110000000000000010", "00001100");// word 3
-			mainMemory.put("111111110000000000000011", "00001101");// word 4
+			mainMemory.put("111111110000000000000000", "00011001");// word 1
+			mainMemory.put("111111110000000000000001", "00011010");// word 2
+			mainMemory.put("111111110000000000000010", "00011011");// word 3
+			mainMemory.put("111111110000000000000011", "00011100");// word 4
 
 			// Block 2
-			mainMemory.put("111111100000000000000100", "00001010");// word 1
-			mainMemory.put("111111100000000000000101", "00001011");// word 2
-			mainMemory.put("111111100000000000000110", "00001100");// word 3
-			mainMemory.put("111111100000000000000111", "00001101");// word 4
+			mainMemory.put("111111100000000000000100", "00011001");// word 1
+			mainMemory.put("111111100000000000000101", "00011010");// word 2
+			mainMemory.put("111111100000000000000110", "00011011");// word 3
+			mainMemory.put("111111100000000000000111", "00011100");// word 4
 
 			// Block 3
-			mainMemory.put("111111010000000000001000", "00001010");// word 1
-			mainMemory.put("111111010000000000001001", "00001011");// word 2
-			mainMemory.put("111111010000000000001010", "00001100");// word 3
-			mainMemory.put("111111010000000000001011", "00001101");// word 4
+			mainMemory.put("111111010000000000001000", "00011001");// word 1
+			mainMemory.put("111111010000000000001001", "00011010");// word 2
+			mainMemory.put("111111010000000000001010", "00011011");// word 3
+			mainMemory.put("111111010000000000001011", "00011100");// word 4
 
 			// Block 4
-			mainMemory.put("101111110000000000001100", "00001010");// word 1
-			mainMemory.put("101111110000000000001101", "00001011");// word 2
-			mainMemory.put("101111110000000000001110", "00001100");// word 3
-			mainMemory.put("101111110000000000001111", "00001101");// word 4
+			mainMemory.put("101111110000000000001100", "00011001");// word 1
+			mainMemory.put("101111110000000000001101", "00011010");// word 2
+			mainMemory.put("101111110000000000001110", "00011011");// word 3
+			mainMemory.put("101111110000000000001111", "00011100");// word 4
 
 			// Block 5
-			mainMemory.put("100111110000000000000000", "00001010");// word 1
-			mainMemory.put("100111110000000000000001", "00001011");// word 2
-			mainMemory.put("100111110000000000000010", "00001100");// word 3
-			mainMemory.put("100111110000000000000011", "00001101");// word 4
+			mainMemory.put("100111110000000000000000", "00011001");// word 1
+			mainMemory.put("100111110000000000000001", "00011010");// word 2
+			mainMemory.put("100111110000000000000010", "00011011");// word 3
+			mainMemory.put("100111110000000000000011", "00011100");// word 4
 
 			// Block 6
-			mainMemory.put("101011110000000000000100", "00001010");// word 1
-			mainMemory.put("101011110000000000000101", "00001011");// word 2
-			mainMemory.put("101011110000000000000110", "00001100");// word 3
-			mainMemory.put("101011110000000000000111", "00001101");// word 4
+			mainMemory.put("101011110000000000000100", "00011001");// word 1
+			mainMemory.put("101011110000000000000101", "00011010");// word 2
+			mainMemory.put("101011110000000000000110", "00011011");// word 3
+			mainMemory.put("101011110000000000000111", "00011100");// word 4
 
-			System.out.println("Acesso à memória cache");
-
-			String ra;
-
-			try {
-
-				// Solicitando que o usuário informe o CPI médio do processador para o cálculo
-				// de ciclos de clocks da aplicação
-				Scanner input = new Scanner(System.in);
-				System.out.print("Informe o endereço de memória: ");
-				ra = input.next();
-
-			} catch (Exception e) {
-				System.out.println("Valor incorreto");
-				return;
-			}
+			System.out.println("\n-------------------------");
+			
+			System.out.println("Iniciando o acesso à memória cache");
 
 			System.out.println("Recebe um endereço RA de 32 bits da CPU: " + ra);
 
@@ -201,10 +187,13 @@ public class CacheSimulator {
 			System.out.println("Entrega linha da RA para a CPU");
 
 			System.out.println("-------------------------\n");
+			
+			return Converter.binaryToDec(byteValue);
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		return 0;
 
 	}
 
