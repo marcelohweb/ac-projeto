@@ -19,7 +19,8 @@ Certifique-se de que o JRE e compilador estão na versão 1.8
 ### Estrutura de arquivos
 
 * assembly.asm - Arquivo com instruções em assembly que serão executadas pelo simulador. 
-* memory.txt - Representa a memória principal. Contém os valores iniciais das variáveis e após a execução conterá os valores finais
+* memory.txt - Representa a memória principal para o simulador de unidade de controle microprogramada. Contém os valores iniciais das variáveis e após a execução conterá os valores finais
+* cache.txt - Representa a memória cache para o simulador de acesso à memória cache
 * $r1.txt - Representa o registrador $r1 que é referenciado pelo arquivo assembly.asm
 * $r2.txt - Representa o registrador $r2 que é referenciado pelo arquivo assembly.asm
 * $r3.txt - Representa o registrador $r3 que é referenciado pelo arquivo assembly.asm
